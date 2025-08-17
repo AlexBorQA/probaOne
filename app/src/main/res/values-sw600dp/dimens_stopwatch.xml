@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stopwatch dimensions for large screens (tablets) -->
+    <dimen name="stopwatch_time_text_size">96sp</dimen>
+    <dimen name="stopwatch_button_height">80dp</dimen>
+    <dimen name="stopwatch_button_text_size">24sp</dimen>
+</resources>

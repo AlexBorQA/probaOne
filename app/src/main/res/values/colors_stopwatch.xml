@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stopwatch specific colors -->
+    <color name="stopwatch_background">#FAFAFA</color>
+    <color name="stopwatch_time_text">#212121</color>
+    
+    <!-- Button colors -->
+    <color name="stopwatch_start_button">#4CAF50</color>
+    <color name="stopwatch_pause_button">#FF9800</color>
+    <color name="stopwatch_reset_button">#757575</color>
+    
+    <!-- Button text colors -->
+    <color name="stopwatch_button_text_primary">#FFFFFF</color>
+    <color name="stopwatch_button_text_secondary">#FFFFFF</color>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stopwatch Button Styles -->
+    <style name="StopwatchButton" parent="Widget.Material3.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="StopwatchButton.Primary">
+        <item name="backgroundTint">@color/stopwatch_start_button</item>
+        <item name="android:textColor">@color/stopwatch_button_text_primary</item>
+    </style>
+
+    <style name="StopwatchButton.Secondary">
+        <item name="backgroundTint">@color/stopwatch_reset_button</item>
+        <item name="android:textColor">@color/stopwatch_button_text_secondary</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stopwatch specific dimensions -->
+    <dimen name="stopwatch_time_text_size">64sp</dimen>
+    <dimen name="stopwatch_button_height">60dp</dimen>
+    <dimen name="stopwatch_button_text_size">18sp</dimen>
+</resources>
