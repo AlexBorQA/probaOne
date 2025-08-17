@@ -3,11 +3,15 @@ package com.example.proba.domain
 import android.os.Handler
 import android.os.Looper
 
-class StopwatchTimer(private val onTick: (Long) -> Unit) {
+class StopwatchTimer(
+    private val onTick: (Long) -> Unit,
+    private val onLapAdded: (Long) -> Unit
+) {
     
     private var startTime: Long = 0L
     private var elapsedTime: Long = 0L
     private var isRunning: Boolean = false
+    private val lapTimes = mutableListOf<Long>()
     private val handler = Handler(Looper.getMainLooper())
     
     private val updateRunnable = object : Runnable {
@@ -41,10 +45,21 @@ class StopwatchTimer(private val onTick: (Long) -> Unit) {
         pause()
     }
     
+    fun addLap() {
+        if (isRunning) {
+            val currentLapTime = getElapsedTime()
+            lapTimes.add(currentLapTime)
+            onLapAdded(currentLapTime)
+        }
+    }
+    
+    fun getLapTimes(): List<Long> = lapTimes.toList()
+    
     fun reset() {
         isRunning = false
         elapsedTime = 0L
         startTime = 0L
+        lapTimes.clear()
         handler.removeCallbacks(updateRunnable)
         onTick(0L)
     }

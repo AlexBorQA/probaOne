@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proba.R
 import com.example.proba.databinding.FragmentStopwatchBinding
 
@@ -17,6 +18,7 @@ class StopwatchFragment : Fragment() {
     private val binding get() = _binding!!
     
     private lateinit var viewModel: StopwatchViewModel
+    private lateinit var lapTimeAdapter: LapTimeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +34,7 @@ class StopwatchFragment : Fragment() {
         
         viewModel = ViewModelProvider(this)[StopwatchViewModel::class.java]
         
+        setupRecyclerView()
         setupObservers()
         setupClickListeners()
     }
@@ -42,17 +45,29 @@ class StopwatchFragment : Fragment() {
         viewModel.refreshState()
     }
 
+    private fun setupRecyclerView() {
+        lapTimeAdapter = LapTimeAdapter()
+        binding.recyclerLaps?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = lapTimeAdapter
+        }
+    }
+
     private fun setupObservers() {
         viewModel.timeText.observe(viewLifecycleOwner) { timeText ->
-            binding.textTime.text = timeText
+            binding.textTime?.text = timeText
         }
         
         viewModel.buttonText.observe(viewLifecycleOwner) { buttonText ->
-            binding.buttonStartPause.text = buttonText
+            binding.buttonStartPause?.text = buttonText
         }
         
         viewModel.buttonColor.observe(viewLifecycleOwner) { buttonState ->
             updateButtonColor(buttonState)
+        }
+        
+        viewModel.lapTimes.observe(viewLifecycleOwner) { lapTimes ->
+            lapTimeAdapter.updateLapTimes(lapTimes)
         }
     }
     
@@ -62,17 +77,21 @@ class StopwatchFragment : Fragment() {
             StopwatchViewModel.ButtonState.PAUSE -> R.color.stopwatch_pause_button
         }
         
-        binding.buttonStartPause.backgroundTintList = ColorStateList.valueOf(
+        binding.buttonStartPause?.backgroundTintList = ColorStateList.valueOf(
             ContextCompat.getColor(requireContext(), color)
         )
     }
 
     private fun setupClickListeners() {
-        binding.buttonStartPause.setOnClickListener {
+        binding.buttonStartPause?.setOnClickListener {
             viewModel.toggleTimer()
         }
         
-        binding.buttonReset.setOnClickListener {
+        binding.buttonLap?.setOnClickListener {
+            viewModel.addLap()
+        }
+        
+        binding.buttonReset?.setOnClickListener {
             viewModel.resetTimer()
         }
     }

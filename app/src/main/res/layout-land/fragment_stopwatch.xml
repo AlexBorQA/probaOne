@@ -41,8 +41,17 @@
             style="@style/StopwatchButton.Primary"
             android:layout_width="140dp"
             android:layout_height="@dimen/stopwatch_button_height"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="START"
+            android:textSize="@dimen/stopwatch_button_text_size" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_lap"
+            style="@style/StopwatchButton.Secondary"
+            android:layout_width="140dp"
+            android:layout_height="@dimen/stopwatch_button_height"
+            android:layout_marginBottom="8dp"
+            android:text="LAP"
             android:textSize="@dimen/stopwatch_button_text_size" />
 
         <com.google.android.material.button.MaterialButton
@@ -54,5 +63,16 @@
             android:textSize="@dimen/stopwatch_button_text_size" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_laps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/lap_list_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttons_container"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
