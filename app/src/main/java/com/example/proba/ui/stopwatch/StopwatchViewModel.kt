@@ -61,7 +61,9 @@ class StopwatchViewModel : ViewModel() {
 
     fun initializeSoundManager(context: Context) {
         if (soundManager == null) {
-            soundManager = SoundManager(context)
+            // Используем ApplicationContext чтобы избежать утечек памяти
+            val appContext = context.applicationContext
+            soundManager = SoundManager(appContext)
         }
     }
     

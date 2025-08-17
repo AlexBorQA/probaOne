@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Stopwatch specific colors -->
-    <color name="stopwatch_background">#FAFAFA</color>
-    <color name="stopwatch_time_text">#212121</color>
+    <color name="stopwatch_background">#F8F9FA</color>
+    <color name="stopwatch_time_text">#1A1A1A</color>
+    <color name="stopwatch_time_text_shadow">#40000000</color>
     
     <!-- Button colors -->
-    <color name="stopwatch_start_button">#4CAF50</color>
-    <color name="stopwatch_pause_button">#FF9800</color>
-    <color name="stopwatch_reset_button">#757575</color>
+    <color name="stopwatch_start_button">#00C853</color>
+    <color name="stopwatch_start_button_pressed">#00A047</color>
+    <color name="stopwatch_pause_button">#FF6D00</color>
+    <color name="stopwatch_pause_button_pressed">#E65100</color>
+    <color name="stopwatch_reset_button">#616161</color>
+    <color name="stopwatch_reset_button_pressed">#424242</color>
     
     <!-- Button text colors -->
     <color name="stopwatch_button_text_primary">#FFFFFF</color>
     <color name="stopwatch_button_text_secondary">#FFFFFF</color>
+    
+    <!-- Lap list colors -->
+    <color name="stopwatch_lap_background">#FFFFFF</color>
+    <color name="stopwatch_lap_divider">#E0E0E0</color>
+    <color name="stopwatch_lap_text">#424242</color>
 </resources>

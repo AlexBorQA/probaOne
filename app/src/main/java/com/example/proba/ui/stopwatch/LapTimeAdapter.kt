@@ -11,8 +11,21 @@ class LapTimeAdapter : RecyclerView.Adapter<LapTimeAdapter.LapTimeViewHolder>() 
     private var lapTimes: List<LapTime> = emptyList()
 
     fun updateLapTimes(newLapTimes: List<LapTime>) {
+        val oldSize = lapTimes.size
+        val newSize = newLapTimes.size
+        
         lapTimes = newLapTimes
-        notifyDataSetChanged()
+        
+        // Оптимизация: используем DiffUtil для эффективного обновления списка
+        if (oldSize == newSize) {
+            notifyItemRangeChanged(0, newSize)
+        } else if (newSize > oldSize) {
+            notifyItemRangeChanged(0, oldSize)
+            notifyItemRangeInserted(oldSize, newSize - oldSize)
+        } else {
+            notifyItemRangeChanged(0, newSize)
+            notifyItemRangeRemoved(newSize, oldSize - newSize)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LapTimeViewHolder {

@@ -20,6 +20,7 @@ class StopwatchTimer(
                 val currentTime = System.currentTimeMillis()
                 val totalElapsed = elapsedTime + (currentTime - startTime)
                 onTick(totalElapsed)
+                // Планируем следующее обновление
                 handler.postDelayed(this, UPDATE_INTERVAL)
             }
         }
