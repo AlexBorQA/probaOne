@@ -3,11 +3,13 @@ package com.example.proba.ui.stopwatch
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.proba.domain.StopwatchTimer
+import com.example.proba.domain.TimeFormatter
 
 class StopwatchViewModel : ViewModel() {
 
     private val _timeText = MutableLiveData<String>().apply {
-        value = "00:00.000"
+        value = "00:00.00"
     }
     val timeText: LiveData<String> = _timeText
 
@@ -16,23 +18,44 @@ class StopwatchViewModel : ViewModel() {
     }
     val isRunning: LiveData<Boolean> = _isRunning
 
-    private val _isPaused = MutableLiveData<Boolean>().apply {
-        value = false
+    private val _buttonText = MutableLiveData<String>().apply {
+        value = "START"
     }
-    val isPaused: LiveData<Boolean> = _isPaused
+    val buttonText: LiveData<String> = _buttonText
 
-    fun startTimer() {
-        // TODO: Реализовать логику старта
+    private val stopwatchTimer = StopwatchTimer { timeInMillis ->
+        _timeText.value = TimeFormatter.formatTime(timeInMillis)
     }
 
-    fun pauseTimer() {
-        // TODO: Реализовать логику паузы
+    fun toggleTimer() {
+        if (stopwatchTimer.isTimerRunning()) {
+            pauseTimer()
+        } else {
+            startTimer()
+        }
+    }
+
+    private fun startTimer() {
+        stopwatchTimer.start()
+        _isRunning.value = true
+        _buttonText.value = "PAUSE"
+    }
+
+    private fun pauseTimer() {
+        stopwatchTimer.pause()
+        _isRunning.value = false
+        _buttonText.value = "START"
     }
 
     fun resetTimer() {
-        // TODO: Реализовать логику сброса
-        _timeText.value = "00:00.000"
+        stopwatchTimer.reset()
         _isRunning.value = false
-        _isPaused.value = false
+        _buttonText.value = "START"
+        _timeText.value = "00:00.00"
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        stopwatchTimer.reset()
     }
 }

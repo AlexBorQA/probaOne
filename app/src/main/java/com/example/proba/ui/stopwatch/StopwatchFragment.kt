@@ -34,11 +34,23 @@ class StopwatchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        // TODO: Добавить наблюдатели для LiveData
+        viewModel.timeText.observe(viewLifecycleOwner) { timeText ->
+            binding.textTime.text = timeText
+        }
+        
+        viewModel.buttonText.observe(viewLifecycleOwner) { buttonText ->
+            binding.buttonStartPause.text = buttonText
+        }
     }
 
     private fun setupClickListeners() {
-        // TODO: Добавить обработчики кнопок
+        binding.buttonStartPause.setOnClickListener {
+            viewModel.toggleTimer()
+        }
+        
+        binding.buttonReset.setOnClickListener {
+            viewModel.resetTimer()
+        }
     }
 
     override fun onDestroyView() {
