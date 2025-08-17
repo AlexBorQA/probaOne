@@ -1,0 +1,3 @@
+# Sound file placeholder for start sound
+# In real project this would be a .wav file
+# For now using system notification sound

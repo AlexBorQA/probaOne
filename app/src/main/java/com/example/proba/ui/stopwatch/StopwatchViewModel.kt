@@ -1,13 +1,17 @@
 package com.example.proba.ui.stopwatch
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.proba.domain.LapTime
+import com.example.proba.domain.SoundManager
 import com.example.proba.domain.StopwatchTimer
 import com.example.proba.domain.TimeFormatter
 
 class StopwatchViewModel : ViewModel() {
+
+    private var soundManager: SoundManager? = null
 
     private val _timeText = MutableLiveData<String>().apply {
         value = "00:00.00"
@@ -55,11 +59,30 @@ class StopwatchViewModel : ViewModel() {
         }
     }
 
+    fun initializeSoundManager(context: Context) {
+        if (soundManager == null) {
+            soundManager = SoundManager(context)
+        }
+    }
+    
+    fun setSoundEnabled(enabled: Boolean) {
+        soundManager?.setSoundEnabled(enabled)
+    }
+    
+    fun setVibrationEnabled(enabled: Boolean) {
+        soundManager?.setVibrationEnabled(enabled)
+    }
+    
+    fun isSoundEnabled(): Boolean = soundManager?.isSoundEnabled() ?: true
+    
+    fun isVibrationEnabled(): Boolean = soundManager?.isVibrationEnabled() ?: true
+
     private fun startTimer() {
         stopwatchTimer.start()
         _isRunning.value = true
         _buttonText.value = "PAUSE"
         _buttonColor.value = ButtonState.PAUSE
+        soundManager?.playStartSound()
     }
 
     private fun pauseTimer() {
@@ -67,10 +90,12 @@ class StopwatchViewModel : ViewModel() {
         _isRunning.value = false
         _buttonText.value = "START"
         _buttonColor.value = ButtonState.START
+        soundManager?.playStopSound()
     }
 
     fun addLap() {
         stopwatchTimer.addLap()
+        soundManager?.playLapSound()
     }
 
     private fun addLapTime(lapTime: Long) {
@@ -107,5 +132,7 @@ class StopwatchViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         stopwatchTimer.reset()
+        soundManager?.release()
+        soundManager = null
     }
 }

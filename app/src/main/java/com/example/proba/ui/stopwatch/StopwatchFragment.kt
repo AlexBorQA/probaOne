@@ -34,6 +34,9 @@ class StopwatchFragment : Fragment() {
         
         viewModel = ViewModelProvider(this)[StopwatchViewModel::class.java]
         
+        // Инициализируем SoundManager
+        viewModel.initializeSoundManager(requireContext())
+        
         setupRecyclerView()
         setupObservers()
         setupClickListeners()
