@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+---
+
+
+
+When you write new code, always check that you haven't broken the old code.
+
+Create a .gitignore file. Fill a .gitignore file.
+
+Create a folder app/prod/. Collect the file app-debug.apk in the prod folder.
+
+Gredlew
+
